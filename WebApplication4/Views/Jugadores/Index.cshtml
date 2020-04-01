@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebApplication4.Models.Jugadores>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="EQUIPO">Equipo</label><br />
+                @Html.Editor("equipo")
+                @Html.ValidationMessage("", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <br />
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+
+            </div>
+        </div>
+    </div>
+
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.posicion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Equipos.nombre)
+        </th>
+        <th>
+            Pais
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.posicion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Equipos.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Equipos.pais)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
